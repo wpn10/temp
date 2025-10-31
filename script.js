@@ -38,6 +38,9 @@ document.addEventListener('DOMContentLoaded', function() {
         lastScrollTop = scrollTop;
     });
     
+    // Initialize EmailJS
+    emailjs.init('YOUR_PUBLIC_KEY'); // You'll need to replace this
+    
     // Contact form handling
     const contactForm = document.getElementById('contactForm');
     const formMessage = document.getElementById('formMessage');
@@ -61,19 +64,28 @@ document.addEventListener('DOMContentLoaded', function() {
             return;
         }
         
-        // Simulate form submission
+        // Send email using EmailJS
         const submitButton = this.querySelector('.submit-button');
         const originalText = submitButton.textContent;
         submitButton.textContent = 'Sending...';
         submitButton.disabled = true;
         
-        // Simulate API call delay
-        setTimeout(() => {
+        // EmailJS send
+        emailjs.send('YOUR_SERVICE_ID', 'YOUR_TEMPLATE_ID', {
+            from_name: name,
+            from_email: email,
+            message: message,
+            to_email: 'paritosh21w@gmail.com'
+        }).then(function(response) {
             showMessage('Thank you for your message! We\'ll get back to you soon.', 'success');
             contactForm.reset();
+        }).catch(function(error) {
+            showMessage('Sorry, there was an error sending your message. Please try again.', 'error');
+            console.error('EmailJS error:', error);
+        }).finally(function() {
             submitButton.textContent = originalText;
             submitButton.disabled = false;
-        }, 1500);
+        });
     });
     
     function showMessage(text, type) {
