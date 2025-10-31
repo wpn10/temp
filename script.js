@@ -128,9 +128,11 @@ document.addEventListener('DOMContentLoaded', function() {
     // Mobile Navigation
     const hamburger = document.querySelector('.hamburger');
     const navMenu = document.querySelector('.nav-menu');
-    const navLinks = document.querySelectorAll('.nav-links a');
+    const mobileNavLinks = document.querySelectorAll('.nav-links a');
 
-    function toggleMobileNav() {
+    function toggleMobileNav(e) {
+        e.preventDefault();
+        e.stopPropagation();
         hamburger.classList.toggle('active');
         navMenu.classList.toggle('active');
     }
@@ -145,7 +147,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     // Close mobile nav when clicking on links
-    navLinks.forEach(link => {
+    mobileNavLinks.forEach(link => {
         link.addEventListener('click', closeMobileNav);
     });
 
