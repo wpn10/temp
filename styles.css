@@ -86,6 +86,7 @@ h1, h2, h3, h4, h5, h6 {
     padding: 1rem 2rem;
     max-width: 1200px;
     margin: 0 auto;
+    position: relative;
 }
 
 .nav-brand h1 {
@@ -97,10 +98,16 @@ h1, h2, h3, h4, h5, h6 {
     font-weight: 800;
 }
 
+.nav-menu {
+    display: flex;
+}
+
 .nav-links {
     display: flex;
     list-style: none;
     gap: 2rem;
+    margin: 0;
+    padding: 0;
 }
 
 .nav-links a {
@@ -109,6 +116,7 @@ h1, h2, h3, h4, h5, h6 {
     font-weight: 500;
     transition: var(--transition);
     position: relative;
+    padding: 0.5rem 0;
 }
 
 .nav-links a::after {
@@ -124,6 +132,41 @@ h1, h2, h3, h4, h5, h6 {
 
 .nav-links a:hover::after {
     width: 100%;
+}
+
+/* Hamburger Menu */
+.hamburger {
+    display: none;
+    flex-direction: column;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    width: 24px;
+    height: 24px;
+    position: relative;
+}
+
+.hamburger span {
+    display: block;
+    width: 24px;
+    height: 2px;
+    background: var(--text-color);
+    margin: 3px 0;
+    transition: 0.3s;
+    transform-origin: center;
+}
+
+.hamburger.active span:nth-child(1) {
+    transform: rotate(45deg) translate(5px, 5px);
+}
+
+.hamburger.active span:nth-child(2) {
+    opacity: 0;
+}
+
+.hamburger.active span:nth-child(3) {
+    transform: rotate(-45deg) translate(7px, -6px);
 }
 
 /* Hero Section */
@@ -449,98 +492,59 @@ h1, h2, h3, h4, h5, h6 {
     }
 }
 
-/* Mobile Navigation */
-.mobile-nav-toggle {
-    display: none;
-    background: none;
-    border: none;
-    font-size: 1.5rem;
-    cursor: pointer;
-    color: var(--text-color);
-}
 
-.mobile-nav-overlay {
-    display: none;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.5);
-    z-index: 999;
-}
-
-.mobile-nav-menu {
-    display: none;
-    position: fixed;
-    top: 0;
-    right: -100%;
-    width: 250px;
-    height: 100%;
-    background: white;
-    box-shadow: -2px 0 10px rgba(0, 0, 0, 0.1);
-    z-index: 1001;
-    transition: right 0.3s ease;
-    padding: 2rem 0;
-}
-
-.mobile-nav-menu.active {
-    right: 0;
-}
-
-.mobile-nav-menu .nav-links {
-    flex-direction: column;
-    gap: 0;
-    padding: 2rem 0;
-}
-
-.mobile-nav-menu .nav-links a {
-    display: block;
-    padding: 1rem 2rem;
-    border-bottom: 1px solid var(--border-color);
-    font-size: 1.1rem;
-}
-
-.mobile-nav-close {
-    position: absolute;
-    top: 1rem;
-    right: 1rem;
-    background: none;
-    border: none;
-    font-size: 1.5rem;
-    cursor: pointer;
-}
-
-/* Responsive Design */
+/* Mobile Styles */
 @media (max-width: 768px) {
-    .header {
-        padding: 0;
-        height: 60px;
-    }
-    
     .nav {
-        padding: 0.75rem 1.5rem;
-        position: relative;
-        height: 60px;
-        align-items: center;
+        padding: 1rem 1.5rem;
     }
     
     .nav-brand h1 {
-        font-size: 1.4rem;
-        margin: 0;
+        font-size: 1.5rem;
+    }
+    
+    .hamburger {
+        display: flex;
+    }
+    
+    .nav-menu {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        background: white;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        transform: translateY(-100%);
+        opacity: 0;
+        visibility: hidden;
+        transition: all 0.3s ease;
+    }
+    
+    .nav-menu.active {
+        transform: translateY(0);
+        opacity: 1;
+        visibility: visible;
     }
     
     .nav-links {
-        display: none;
+        flex-direction: column;
+        gap: 0;
+        padding: 1rem 0;
     }
     
-    .mobile-nav-toggle {
+    .nav-links a {
+        padding: 1rem 2rem;
+        border-bottom: 1px solid var(--border-color);
         display: block;
     }
     
+    .nav-links a::after {
+        display: none;
+    }
+    
     .hero {
-        padding: 4rem 1rem 3rem;
-        margin-top: 60px;
+        margin-top: 80px;
+        padding: 5rem 1rem 4rem;
     }
     
     .hero-title {
@@ -575,9 +579,17 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 @media (max-width: 480px) {
+    .nav {
+        padding: 0.75rem 1rem;
+    }
+    
+    .nav-brand h1 {
+        font-size: 1.3rem;
+    }
+    
     .hero {
-        margin-top: 60px;
-        padding: 3rem 1rem 2rem;
+        margin-top: 70px;
+        padding: 4rem 1rem 3rem;
     }
     
     .hero-title {
@@ -590,13 +602,5 @@ h1, h2, h3, h4, h5, h6 {
     
     .container {
         padding: 0 15px;
-    }
-    
-    .nav {
-        padding: 0.5rem 1rem;
-    }
-    
-    .nav-brand h1 {
-        font-size: 1.3rem;
     }
 }

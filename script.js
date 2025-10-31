@@ -125,59 +125,48 @@ document.addEventListener('DOMContentLoaded', function() {
         observer.observe(el);
     });
     
-    // Remove old mobile menu code (now handled by proper mobile nav)
-    
     // Mobile Navigation
-    const mobileNavToggle = document.querySelector('.mobile-nav-toggle');
-    const mobileNavOverlay = document.querySelector('.mobile-nav-overlay');
-    const mobileNavMenu = document.querySelector('.mobile-nav-menu');
-    const mobileNavClose = document.querySelector('.mobile-nav-close');
-    const mobileNavLinks = document.querySelectorAll('.mobile-nav-menu .nav-links a');
+    const hamburger = document.querySelector('.hamburger');
+    const navMenu = document.querySelector('.nav-menu');
+    const navLinks = document.querySelectorAll('.nav-links a');
 
-    function openMobileNav() {
-        mobileNavOverlay.style.display = 'block';
-        mobileNavMenu.style.display = 'block';
-        setTimeout(() => {
-            mobileNavMenu.classList.add('active');
-        }, 10);
-        document.body.style.overflow = 'hidden';
+    function toggleMobileNav() {
+        hamburger.classList.toggle('active');
+        navMenu.classList.toggle('active');
     }
 
     function closeMobileNav() {
-        mobileNavMenu.classList.remove('active');
-        setTimeout(() => {
-            mobileNavOverlay.style.display = 'none';
-            mobileNavMenu.style.display = 'none';
-        }, 300);
-        document.body.style.overflow = '';
+        hamburger.classList.remove('active');
+        navMenu.classList.remove('active');
     }
 
-    if (mobileNavToggle) {
-        mobileNavToggle.addEventListener('click', openMobileNav);
-    }
-
-    if (mobileNavClose) {
-        mobileNavClose.addEventListener('click', closeMobileNav);
-    }
-
-    if (mobileNavOverlay) {
-        mobileNavOverlay.addEventListener('click', closeMobileNav);
+    if (hamburger) {
+        hamburger.addEventListener('click', toggleMobileNav);
     }
 
     // Close mobile nav when clicking on links
-    mobileNavLinks.forEach(link => {
+    navLinks.forEach(link => {
         link.addEventListener('click', closeMobileNav);
+    });
+
+    // Close mobile nav when clicking outside
+    document.addEventListener('click', function(e) {
+        if (window.innerWidth <= 768 && 
+            !hamburger.contains(e.target) && 
+            !navMenu.contains(e.target)) {
+            closeMobileNav();
+        }
     });
     
     // Add some interactive effects
     const serviceCards = document.querySelectorAll('.service-card');
     serviceCards.forEach(card => {
         card.addEventListener('mouseenter', function() {
-            this.style.transform = 'translateY(-8px) scale(1.02)';
+            this.style.transform = 'translateY(-5px)';
         });
         
         card.addEventListener('mouseleave', function() {
-            this.style.transform = 'translateY(0) scale(1)';
+            this.style.transform = 'translateY(0)';
         });
     });
     
