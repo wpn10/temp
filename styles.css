@@ -134,6 +134,7 @@ h1, h2, h3, h4, h5, h6 {
     text-align: center;
     position: relative;
     overflow: hidden;
+    margin-top: 80px; /* Account for fixed header */
 }
 
 .hero::before {
@@ -448,20 +449,94 @@ h1, h2, h3, h4, h5, h6 {
     }
 }
 
+/* Mobile Navigation */
+.mobile-nav-toggle {
+    display: none;
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+    color: var(--text-color);
+}
+
+.mobile-nav-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 999;
+}
+
+.mobile-nav-menu {
+    display: none;
+    position: fixed;
+    top: 0;
+    right: -100%;
+    width: 250px;
+    height: 100%;
+    background: white;
+    box-shadow: -2px 0 10px rgba(0, 0, 0, 0.1);
+    z-index: 1001;
+    transition: right 0.3s ease;
+    padding: 2rem 0;
+}
+
+.mobile-nav-menu.active {
+    right: 0;
+}
+
+.mobile-nav-menu .nav-links {
+    flex-direction: column;
+    gap: 0;
+    padding: 2rem 0;
+}
+
+.mobile-nav-menu .nav-links a {
+    display: block;
+    padding: 1rem 2rem;
+    border-bottom: 1px solid var(--border-color);
+    font-size: 1.1rem;
+}
+
+.mobile-nav-close {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+}
+
 /* Responsive Design */
 @media (max-width: 768px) {
+    .header {
+        padding: 0;
+    }
+    
     .nav {
-        flex-direction: column;
-        gap: 1rem;
-        padding: 1rem;
+        padding: 1rem 2rem;
+        position: relative;
+    }
+    
+    .nav-brand h1 {
+        font-size: 1.5rem;
     }
     
     .nav-links {
-        gap: 1rem;
+        display: none;
+    }
+    
+    .mobile-nav-toggle {
+        display: block;
     }
     
     .hero {
         padding: 6rem 1rem 4rem;
+        margin-top: 70px;
     }
     
     .hero-title {

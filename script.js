@@ -131,23 +131,47 @@ document.addEventListener('DOMContentLoaded', function() {
     mobileMenuToggle.className = 'mobile-menu-toggle';
     mobileMenuToggle.style.display = 'none';
     
-    // Add responsive menu behavior
-    function handleResize() {
-        const navLinks = document.querySelector('.nav-links');
-        if (window.innerWidth <= 768) {
-            // Mobile view
-            if (!document.querySelector('.mobile-menu-toggle')) {
-                document.querySelector('.nav').appendChild(mobileMenuToggle);
-                mobileMenuToggle.style.display = 'block';
-            }
-        } else {
-            // Desktop view
-            mobileMenuToggle.style.display = 'none';
-        }
+    // Mobile Navigation
+    const mobileNavToggle = document.querySelector('.mobile-nav-toggle');
+    const mobileNavOverlay = document.querySelector('.mobile-nav-overlay');
+    const mobileNavMenu = document.querySelector('.mobile-nav-menu');
+    const mobileNavClose = document.querySelector('.mobile-nav-close');
+    const mobileNavLinks = document.querySelectorAll('.mobile-nav-menu .nav-links a');
+
+    function openMobileNav() {
+        mobileNavOverlay.style.display = 'block';
+        mobileNavMenu.style.display = 'block';
+        setTimeout(() => {
+            mobileNavMenu.classList.add('active');
+        }, 10);
+        document.body.style.overflow = 'hidden';
     }
-    
-    window.addEventListener('resize', handleResize);
-    handleResize(); // Initial call
+
+    function closeMobileNav() {
+        mobileNavMenu.classList.remove('active');
+        setTimeout(() => {
+            mobileNavOverlay.style.display = 'none';
+            mobileNavMenu.style.display = 'none';
+        }, 300);
+        document.body.style.overflow = '';
+    }
+
+    if (mobileNavToggle) {
+        mobileNavToggle.addEventListener('click', openMobileNav);
+    }
+
+    if (mobileNavClose) {
+        mobileNavClose.addEventListener('click', closeMobileNav);
+    }
+
+    if (mobileNavOverlay) {
+        mobileNavOverlay.addEventListener('click', closeMobileNav);
+    }
+
+    // Close mobile nav when clicking on links
+    mobileNavLinks.forEach(link => {
+        link.addEventListener('click', closeMobileNav);
+    });
     
     // Add some interactive effects
     const serviceCards = document.querySelectorAll('.service-card');
