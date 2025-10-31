@@ -515,15 +515,19 @@ h1, h2, h3, h4, h5, h6 {
 @media (max-width: 768px) {
     .header {
         padding: 0;
+        height: 60px;
     }
     
     .nav {
-        padding: 1rem 2rem;
+        padding: 0.75rem 1.5rem;
         position: relative;
+        height: 60px;
+        align-items: center;
     }
     
     .nav-brand h1 {
-        font-size: 1.5rem;
+        font-size: 1.4rem;
+        margin: 0;
     }
     
     .nav-links {
@@ -535,8 +539,8 @@ h1, h2, h3, h4, h5, h6 {
     }
     
     .hero {
-        padding: 6rem 1rem 4rem;
-        margin-top: 70px;
+        padding: 4rem 1rem 3rem;
+        margin-top: 60px;
     }
     
     .hero-title {
@@ -571,6 +575,11 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 @media (max-width: 480px) {
+    .hero {
+        margin-top: 60px;
+        padding: 3rem 1rem 2rem;
+    }
+    
     .hero-title {
         font-size: 2rem;
     }
@@ -583,8 +592,11 @@ h1, h2, h3, h4, h5, h6 {
         padding: 0 15px;
     }
     
-    .nav-links {
-        flex-direction: column;
-        text-align: center;
+    .nav {
+        padding: 0.5rem 1rem;
+    }
+    
+    .nav-brand h1 {
+        font-size: 1.3rem;
     }
 }

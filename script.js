@@ -125,11 +125,7 @@ document.addEventListener('DOMContentLoaded', function() {
         observer.observe(el);
     });
     
-    // Mobile menu toggle (if needed for future enhancement)
-    const mobileMenuToggle = document.createElement('button');
-    mobileMenuToggle.innerHTML = '☰';
-    mobileMenuToggle.className = 'mobile-menu-toggle';
-    mobileMenuToggle.style.display = 'none';
+    // Remove old mobile menu code (now handled by proper mobile nav)
     
     // Mobile Navigation
     const mobileNavToggle = document.querySelector('.mobile-nav-toggle');
